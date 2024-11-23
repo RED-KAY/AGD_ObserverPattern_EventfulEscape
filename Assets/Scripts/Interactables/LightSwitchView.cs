@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,9 +9,24 @@ public class LightSwitchView : MonoBehaviour, IInteractable
 
     private void Start() => currentState = SwitchState.Off;
 
+    public delegate void LightSwitchViewDelegate();
+    public LightSwitchViewDelegate _LightSwitch;
+
+    void OnEnable()
+    {
+        _LightSwitch = OnLightSwitchToggle;
+    }
+
+    private void OnLightSwitchToggle()
+    {
+        toggleLights();
+    }
+
     public void Interact()
     {
         //Todo - Implement Interaction
+
+        _LightSwitch?.Invoke();
     }
     private void toggleLights()
     {
