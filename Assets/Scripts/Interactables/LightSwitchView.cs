@@ -17,6 +17,11 @@ public class LightSwitchView : MonoBehaviour, IInteractable
         _LightSwitch += OnLightSwitchToggle;
     }
 
+    void OnDisable()
+    {
+        _LightSwitch -= OnLightSwitchToggle;
+    }
+
     private void OnLightSwitchToggle()
     {
         toggleLights();
