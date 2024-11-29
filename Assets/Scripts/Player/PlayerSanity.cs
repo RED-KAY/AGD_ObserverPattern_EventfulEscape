@@ -11,11 +11,13 @@ public class PlayerSanity : MonoBehaviour
     private void OnEnable()
     {
         EventService.Instance.OnRatRush.AddListener(OnSupernaturalEvent);
+        EventService.Instance.OnSkullDrop.AddListener(OnSkullDropEvent);
     }
 
     private void OnDisable()
     {
         EventService.Instance.OnRatRush.RemoveListener(OnSupernaturalEvent);
+        EventService.Instance.OnSkullDrop.RemoveListener(OnSkullDropEvent);
     }
 
     private void Start()
@@ -64,6 +66,11 @@ public class PlayerSanity : MonoBehaviour
         GameService.Instance.GetGameUI().UpdateInsanity(1f - sanityLevel / maxSanity);
     }
     private void OnSupernaturalEvent()
+    {
+        increaseSanity(sanityDropAmountPerEvent);
+    }
+
+    private void OnSkullDropEvent()
     {
         increaseSanity(sanityDropAmountPerEvent);
     }
